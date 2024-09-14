@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Edit Task</h1>
+    <form th:action="@{/tasks/save-update}" th:object="${todo}" method="post">
+        <input type="hidden" th:field="*{id}" /> <!-- Hidden field for the task ID -->
+        <div class="form-group">
+            <label for="task">Task Name</label>
+            <input type="text" id="task" th:field="*{task}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" th:field="*{priority}" class="form-control">
+                <option value="Low" th:selected="${todo.priority == 'Low'}">Low</option>
+                <option value="Medium" th:selected="${todo.priority == 'Medium'}">Medium</option>
+                <option value="High" th:selected="${todo.priority == 'High'}">High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="completed">Completed</label>
+            <select id="completed" th:field="*{completed}" class="form-control">
+                <option value="false" th:selected="${!todo.completed}">No</option>
+                <option value="true" th:selected="${todo.completed}">Yes</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <a href="/tasks" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+</body>
+</html>
+

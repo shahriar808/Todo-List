@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Add New Task</h1>
+    <form th:action="@{/tasks/save}" th:object="${todo}" method="post">
+        <div class="form-group">
+            <label for="task">Task Name</label>
+            <input type="text" id="task" th:field="*{task}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" th:field="*{priority}" class="form-control">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="completed">Completed</label>
+            <select id="completed" th:field="*{completed}" class="form-control">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+    <a href="/tasks" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tasks List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>All Tasks</h1>
+    <div class="mb-3">
+        <a href="/tasks/add" class="btn btn-secondary">Add New Task</a>
+        <a href="/tasks/completed" class="btn btn-success">Completed Tasks</a>
+        <a href="/tasks/remaining" class="btn btn-warning">Remaining Tasks</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Task</th>
+            <th>Priority</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="todo : ${todo}">
+            <td th:text="${todo.task}">Task Name</td>
+            <td th:text="${todo.priority}">Priority</td>
+            <td th:text="${todo.completed ? 'Yes' : 'No'}">Completed</td>
+            <td>
+                <a th:href="@{/tasks/{id}(id=${todo.id})}" class="btn btn-info">View</a>
+                <a th:href="@{/tasks/edit/{id}(id=${todo.id})}" class="btn btn-warning">Edit</a>
+                <a th:href="@{/tasks/delete/{id}(id=${todo.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
